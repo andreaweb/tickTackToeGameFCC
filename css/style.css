@@ -1,0 +1,20 @@
+body{
+  max-width: 360px;
+  margin: 10px auto;
+}
+div.row{
+  height: 50px;
+  display: flex;
+  border-bottom: 4px solid black;
+}
+div.row:last-child{
+  border: none;
+}
+div.tile{
+  width: calc( 100% / 3);
+  height: 50px;
+  border-left: 4px solid black;
+}
+div.tile:first-child{
+  border-left: none;
+}
