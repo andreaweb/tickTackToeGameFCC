@@ -1,11 +1,63 @@
 body{
-  max-width: 360px;
+  max-width: 960px;
   margin: 10px auto;
+  color: #0700FF;
+  background-color: #FFA900;
+}
+.popup{
+  display: none;
+  color: #FFA900;
+  background-color: #0700FF;
+  width: 300px;
+  border-radius: 10px;
+  padding: 20px;
+  position: absolute;
+  left: calc(50% - 200px);
+  top: 50%;
+}
+h1{
+ font-family: 'Ruslan Display', cursive;
+ font-size: 3em;
+ margin-bottom: 0;
+}
+h2{
+  font-family: sans-serif;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 3em;
+}
+h3{
+  font-size: 1.5em;
+  margin-top: 0;
+}
+h4{
+  font-family: 'Ruslan Display', cursive;
+  font-variant: small-caps;
+  font-weight: 600;
+}
+section{
+  width: 30%;
+  float: left;
+  background-color: #fff;
+  margin: 0 2% 20px 0;
+  border-radius: 10px;
+  text-align: center;
+}
+section p{
+  font-size: 1.5em;
+  margin-top: 0;
+}
+main{
+  width: 94%;
+  clear: both;
+  padding-top: 3em;
 }
 div.row{
   height: 50px;
   display: flex;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #0700FF;
+  text-align: center;
+  font-size: 2em;
 }
 div.row:last-child{
   border: none;
@@ -13,8 +65,20 @@ div.row:last-child{
 div.tile{
   width: calc( 100% / 3);
   height: 50px;
-  border-left: 4px solid black;
+  border-left: 4px solid #0700FF;
+  color: #FFF;
+  font-family: 'Ruslan Display', cursive;
 }
 div.tile:first-child{
   border-left: none;
+}
+
+@media screen and (max-width: 960px){
+  section{
+    width: 29%;
+    margin: 0 2% 20px;
+  }
+  main, h1, h2{
+    margin-left: 2%;
+  }
 }
