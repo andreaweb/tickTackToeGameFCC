@@ -9,17 +9,20 @@ $(".tile").on("click", function(){
 
   $(this).append("X").addClass("unavailable"); //if click is valid, we can fill the tile with X
 
-  //then we check if there is a victory
-  checkVictory();
+ 
 
-  //if not, the machine can make its move
-  addO();
+ 
   
   //then we check for a draw -> must happen BEFORE checkVictory(), otherwise it overwrites it
   checkDraw();
   
-  //then we check if the machine won
-  checkVictory();
+   //then we check if there is a victory
+  checkVictoryFirstScenario();
+  checkVictorySecondScenario();
+  checkVictoryThirdScenario();
+  
+   //if not, the machine can make its move
+  addO();
 
   function addO(){
     var selection = [];
@@ -39,7 +42,7 @@ $(".tile").on("click", function(){
     $(selection[machineMove]).append("O").addClass("unavailable");
   }
 
-  function checkVictory(){//current issue: need to get out of this function after first showPopUp is called
+  function checkVictoryFirstScenario(){
     //covers the tiles that share the same position in each row (1st, 2nd or 3rd) have the same html
     for(var m = 0; m < 3; m++){
       if($(tileOrder[m]).html() === $(tileOrder[m+3]).html() &&
@@ -53,10 +56,10 @@ $(".tile").on("click", function(){
         
       }
     }
-      
-    
-    // this covers the middle tile of the middle row has the same html as its extreme opposites
-    if($(tileOrder[4]).html() === $(tileOrder[8]).html() && 
+  }
+  
+  function checkVictorySecondScenario(){
+     if($(tileOrder[4]).html() === $(tileOrder[8]).html() && 
        $(tileOrder[4]).html() === $(tileOrder[0]).html() && $(tileOrder[0]).hasClass("unavailable") ||
        $(tileOrder[4]).html() === $(tileOrder[6]).html() &&
        $(tileOrder[4]).html() === $(tileOrder[2]).html() && $(tileOrder[2]).hasClass("unavailable")){
@@ -68,8 +71,11 @@ $(".tile").on("click", function(){
             showPopUp(".victories");
           }
     }
+  }
     
-    
+    // this covers the middle tile of the middle row has the same html as its extreme opposites
+   
+  function checkVictoryThirdScenario(){
     var count = 0;
     
     //all tiles in the same row have the same html
