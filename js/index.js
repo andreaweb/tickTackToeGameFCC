@@ -4,14 +4,11 @@ $(".tile").on("click", function(){
   var tileOrder = document.querySelectorAll(".tile");
 
   if( $(this).hasClass("unavailable") || $(".popup").hasClass("no-more-clicks") ){
-    return false; //first thing we do is check if the click is valid (tile must NOT have something already)
+    return false; //first thing we do is check if the click is valid (tile must be empty)
   }  
 
   $(this).append("X").addClass("unavailable"); //if click is valid, we can fill the tile with X
 
- 
-
- 
   
   //then we check for a draw -> must happen BEFORE checkVictory(), otherwise it overwrites it
   checkDraw();
@@ -26,6 +23,7 @@ $(".tile").on("click", function(){
 
   function addO(){
     var selection = [];
+    
     //check all available (empty) tiles and make a random selection out of them
     $( ".tile" ).each(function( index ) {
       
@@ -41,9 +39,9 @@ $(".tile").on("click", function(){
     var machineMove = Math.floor(Math.random() * (selection.length - 0));
     $(selection[machineMove]).append("O").addClass("unavailable");
   }
-
+  
+  //covers the tiles that share the same position in each row (1st, 2nd or 3rd) have the same html
   function checkVictoryFirstScenario(){
-    //covers the tiles that share the same position in each row (1st, 2nd or 3rd) have the same html
     for(var m = 0; m < 3; m++){
       if($(tileOrder[m]).html() === $(tileOrder[m+3]).html() &&
          $(tileOrder[m]).html() === $(tileOrder[m+6]).html() && $(tileOrder[m]).hasClass("unavailable") ){
@@ -58,6 +56,7 @@ $(".tile").on("click", function(){
     }
   }
   
+  // this covers the middle tile of the middle row has the same html as its extreme opposites
   function checkVictorySecondScenario(){
      if($(tileOrder[4]).html() === $(tileOrder[8]).html() && 
        $(tileOrder[4]).html() === $(tileOrder[0]).html() && $(tileOrder[0]).hasClass("unavailable") ||
@@ -71,32 +70,16 @@ $(".tile").on("click", function(){
             showPopUp(".victories");
           }
     }
-  }
-    
-    // this covers the middle tile of the middle row has the same html as its extreme opposites
+  }   
    
   function checkVictoryThirdScenario(){
-    var count = 0;
-    
-    //all tiles in the same row have the same html
-    var onePerRow = [tileOrder[0], tileOrder[3], tileOrder[6]];
-    for(var i = 0; i < onePerRow.length; i++){
-      var answer = $(onePerRow[i]).html();
-      $(onePerRow[i]).siblings().each( function () {
-        if(answer !== $(this).html() || answer == ""){
-          //alert("not this time");
-          return false;  
-        }
-        count++;
-        if(count > 2){
-          console.log("3");
-          if($(this).html() === "O"){
-            showPopUp(".defeats"); 
-          }else{
+    var i = 0;
+    while(i < 8){
+      if($(tileOrder[i]).html() !== "" && $(tileOrder[i]).html() === $(tileOrder[i+1]).html() && 
+         $(tileOrder[i]).html() === $(tileOrder[i+2]).html()){
             showPopUp(".victories");
-          }
-        }
-      });
+      }
+      i = i + 3;
     }
   }
   
@@ -107,6 +90,7 @@ $(".tile").on("click", function(){
     }
   }
     
+ //shows Pop up with result and adequately fills the board
   function showPopUp(result){
     var oldValue = $(result).find("p");
     var updatedValue = parseInt(oldValue.html())+1;
@@ -123,15 +107,15 @@ $(".tile").on("click", function(){
   
   $("button").on("click", function(){
     $(".popup").hide().removeClass("no-more-clicks");
-    victory();
+    nextRound();
   });
  
-  function victory(){
+  //starts next round by emptying all tiles
+  function nextRound(){
     console.log( $(".popup h3").html());
     for(var j= 0; j < tileOrder.length; j++){
       $(tileOrder[j]).removeClass("unavailable");
       $(tileOrder[j]).empty();
     }
-  }
-  
+  }  
 });
