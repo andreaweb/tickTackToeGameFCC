@@ -1,13 +1,13 @@
 body{
   max-width: 960px;
   margin: 10px auto;
-  color: #0700FF;
-  background-color: #FFA900;
+  color: rgba(20, 19, 53, 0.84);;
+  background-color: rgb(197, 57, 18);;
 }
 .popup{
   display: none;
-  color: #FFA900;
-  background-color: #0700FF;
+  color: rgb(197, 57, 18);;
+  background-color: rgba(20, 19, 53, 0.84);;
   width: 300px;
   border-radius: 10px;
   padding: 20px;
@@ -38,9 +38,8 @@ h4{
 section{
   width: 30%;
   float: left;
-  background-color: #fff;
+  background-color: rgba(168, 206, 91, 0.26);
   margin: 0 2% 20px 0;
-  border-radius: 10px;
   text-align: center;
 }
 section p{
@@ -55,7 +54,7 @@ main{
 div.row{
   height: 50px;
   display: flex;
-  border-bottom: 4px solid #0700FF;
+  border-bottom: 4px solid rgba(20, 19, 53, 0.84);;
   text-align: center;
   font-size: 2em;
 }
@@ -65,7 +64,7 @@ div.row:last-child{
 div.tile{
   width: calc( 100% / 3);
   height: 50px;
-  border-left: 4px solid #0700FF;
+  border-left: 4px solid rgba(20, 19, 53, 0.84);;
   color: #FFF;
   font-family: 'Ruslan Display', cursive;
 }
