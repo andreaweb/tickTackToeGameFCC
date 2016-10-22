@@ -45,18 +45,16 @@ $(".tile").on("click", function(){
   function checkVictoryFirstScenario(move){
     for(var m = 0; m < 3; m++){
       if($(tileOrder[m]).html() === $(tileOrder[m+3]).html() &&
-         $(tileOrder[m]).html() === $(tileOrder[m+6]).html() && $(tileOrder[m]).hasClass("unavailable") ){
-        console.log(m);  
-        if(move === "O"){
+         $(tileOrder[m]).html() === $(tileOrder[m+6]).html() && $(tileOrder[m]).hasClass("unavailable") ){ 
+          if($(tileOrder[m]).html() === "O"){
             showPopUp(".defeats"); 
           }else{
             showPopUp(".victories");
           } 
-      }else if(m==2){
-      //victory scenario conditions not met, check next scenario
-        checkVictorySecondScenario(move);
       }
     }
+    //victory scenario conditions not met, check next scenario
+    checkVictorySecondScenario(move);
   }
   
   //covers the scenario where middle tile of the middle row has the same html as its extreme opposites
