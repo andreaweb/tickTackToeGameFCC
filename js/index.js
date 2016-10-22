@@ -14,7 +14,7 @@ $(".tile").on("click", function(){
 
   
    //then we check if there is a victory
-  checkVictoryFirstScenario();
+  checkVictoryFirstScenario("X");
   
   function addO(){
     var selection = [];
@@ -39,50 +39,50 @@ $(".tile").on("click", function(){
     var machineMove = Math.floor(Math.random() * (selection.length - 0));
     $(selection[machineMove]).append("O").addClass("unavailable");
 
-    checkVictoryFirstScenario();
+    checkVictoryFirstScenario("O");
   }
   
   //covers the tiles that share the same position in each row (1st, 2nd or 3rd) have the same html
-  function checkVictoryFirstScenario(){
+  function checkVictoryFirstScenario(move){
     for(var m = 0; m < 3; m++){
       if($(tileOrder[m]).html() === $(tileOrder[m+3]).html() &&
          $(tileOrder[m]).html() === $(tileOrder[m+6]).html() && $(tileOrder[m]).hasClass("unavailable") ){
         console.log(m);  
-        if($(tileOrder[m]).html() === "O"){
+        if(move === "O"){
             showPopUp(".defeats"); 
           }else{
             showPopUp(".victories");
           } 
       }else if(m==2){
-        checkVictorySecondScenario();
+        checkVictorySecondScenario(move);
       }
     }
   }
   
   // this covers the middle tile of the middle row has the same html as its extreme opposites
-  function checkVictorySecondScenario(){
+  function checkVictorySecondScenario(move){
     if($(tileOrder[4]).html() === $(tileOrder[8]).html() && 
        $(tileOrder[4]).html() === $(tileOrder[0]).html() && $(tileOrder[0]).hasClass("unavailable") ||
        $(tileOrder[4]).html() === $(tileOrder[6]).html() &&
        $(tileOrder[4]).html() === $(tileOrder[2]).html() && $(tileOrder[2]).hasClass("unavailable")){
       console.log("2");    
-      if($(tileOrder[4]).html() === "O"){
+      if(move === "O"){
             showPopUp(".defeats"); 
            
           }else{
             showPopUp(".victories");
           }
     }else{
-        checkVictoryThirdScenario();
+        checkVictoryThirdScenario(move);
     }
   }   
    
-  function checkVictoryThirdScenario(){
+  function checkVictoryThirdScenario(move){
     var i = 0;
     while(i < 8){
       if($(tileOrder[i]).html() !== "" && $(tileOrder[i]).html() === $(tileOrder[i+1]).html() && 
          $(tileOrder[i]).html() === $(tileOrder[i+2]).html()){
-            if($(tileOrder[i]).html() === "O"){
+            if(move === "O"){
               showPopUp(".defeats"); 
             }else{
               showPopUp(".victories");  
@@ -91,7 +91,10 @@ $(".tile").on("click", function(){
       }
       i = i + 3;
     }
+    if(move === "X"){
       addO(); //no victory happened after human's turn, so the machine can make its move
+    }
+      
       //the function is still called, if conditions must be changed
   }
     
