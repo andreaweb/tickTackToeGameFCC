@@ -51,10 +51,13 @@ $(".tile").on("click", function(){
           }else{
             showPopUp(".victories");
           } 
+      }else if(m == 2){
+        checkVictorySecondScenario(move);
       }
     }
+
     //victory scenario conditions not met, check next scenario
-    checkVictorySecondScenario(move);
+    
   }
   
   //covers the scenario where middle tile of the middle row has the same html as its extreme opposites
@@ -62,8 +65,7 @@ $(".tile").on("click", function(){
     if($(tileOrder[4]).html() === $(tileOrder[8]).html() && 
        $(tileOrder[4]).html() === $(tileOrder[0]).html() && $(tileOrder[0]).hasClass("unavailable") ||
        $(tileOrder[4]).html() === $(tileOrder[6]).html() &&
-       $(tileOrder[4]).html() === $(tileOrder[2]).html() && $(tileOrder[2]).hasClass("unavailable")){
-      console.log("2");    
+       $(tileOrder[4]).html() === $(tileOrder[2]).html() && $(tileOrder[2]).hasClass("unavailable")){    
       if(move === "O"){
             showPopUp(".defeats"); 
            
